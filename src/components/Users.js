@@ -11,7 +11,13 @@ class Users extends Component {
         }
     }
 
-    toggleUsersHandler() {
+    componentDidUpdate() {
+        if(this.props.users.length === 0) {
+            throw new Error('No users provided!');
+        }
+    }
+
+    toggleUsersHandler = () => {
         this.setState((curState) => {
             return {
                 showUsers: !curState.showUsers
@@ -30,7 +36,7 @@ class Users extends Component {
 
         return (
             <div className={classes.users}>
-                <button onClick={this.toggleUsersHandler.bind(this)}>
+                <button onClick={this.toggleUsersHandler}>
                     {this.state.showUsers ? 'Hide' : 'Show'} Users
                 </button>
                 {this.state.showUsers && usersList}
